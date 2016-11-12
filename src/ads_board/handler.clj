@@ -1,18 +1,23 @@
 (ns ads-board.handler
   (:require [compojure.core :refer :all]
+            [ads-board.layout :refer [error-page]]
             [compojure.route :as route]
-            [ads-board.user :as user]
-            [ads-board.post :as post]
-            [ads-board.category :as category]
-            [ads-board.feadback :as feadback]
+            [clojure.java.io :as io]
+            [ring.util.response :as resp]
+            [ads-board.layout :as layout]
+            [ads-board.controllers.user :as user]
+            [ads-board.controllers.ad :as ad]
+            [ads-board.controllers.category :as category]
+            [ads-board.controllers.feadback :as feadback]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
 (defroutes app-routes
-  (GET "/user" [] (user/read-all))
-  (GET "/post" [] (post/read-all))
-  (GET "/feadback" [] (feadback/read-all))
-  (GET "/category" [] (category/read-all))
-  (GET "/" [] "hello world!")
+  (GET "/user/:id" [id] (user/show id))
+  (GET "/users" [] (user/index))
+  (GET "/ads" [] (ad/ads))
+  (GET "/feadback" [] (feadback/feadbacks))
+  (GET "/category" [] (category/categories))
+  (GET "/" [] (layout/render "simple.html"))
   (route/not-found "Not Found"))
 
 (def app

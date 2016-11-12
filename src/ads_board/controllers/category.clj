@@ -1,17 +1,13 @@
-(ns ads-board.user
+(ns ads-board.controllers.category
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.java.jdbc.sql :as sql]))
 
 (def mysql-db {:subprotocol "mysql"
                :subname "//localhost:3306/ad_db"
                :user "root"
-               :password ""
+               :password "1111"
                :zeroDateTimeBehavior "convertToNull"})
 
-(defn read [username]
+(defn categories []
   (jdbc/query mysql-db
-    (sql/select * :users (sql/where {:name username}))))
-
-(defn read-all []
-  (jdbc/query mysql-db
-    (sql/select * :users )))
+    (sql/select * :category)))
