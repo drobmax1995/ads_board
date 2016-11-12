@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2016 at 09:54 PM
+-- Generation Time: Nov 12, 2016 at 07:12 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -30,6 +30,19 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `c_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `c_name`) VALUES
+(1, ''),
+(2, 'home'),
+(3, 'office'),
+(4, 'food'),
+(5, 'cars'),
+(6, 'building'),
+(7, 'lolol');
 
 -- --------------------------------------------------------
 
@@ -67,6 +80,16 @@ CREATE TABLE `feadback` (
   `body` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `feadback`
+--
+
+INSERT INTO `feadback` (`feadback_id`, `post_id`, `user_id`, `created_at`, `body`) VALUES
+(1, 1, 3, '2016-11-10', 'lol '),
+(2, 1, 2, '2016-11-09', 'azuz azazaza'),
+(3, 1, 2, '2016-11-16', 'kek'),
+(4, 1, 3, '2016-11-12', 'shlabudabuda');
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +106,16 @@ CREATE TABLE `posts` (
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `user_id`, `category_id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'post1', 'khdfjsgadhfh adsfjasdgfhjgasdhf sjhfghasd fjhsadgfygeuegfsdhjgf sdjhfghjsagf sjhfdg sdfjhgsfhgsdhfghasgf ', 'pending', '2016-11-12', '2016-11-13'),
+(2, 1, 6, 'asdfsdfg', 'dsfefuweiou886437865764756783645876783468', 'approoved', '2016-11-01', '2016-11-02'),
+(3, 2, 2, 'title title title', 'deicrkshdjfh dfsakjasdf as7sdaf sadf7f 34 43 43 4 4 4 4 43 43 4 43 43 43 43 43 43', 'approoved', '2016-11-03', '2016-11-03'),
+(4, 2, 3, 'tttr', 'wertwerxecfer', 'approoved', '2016-11-08', '2016-11-08');
 
 -- --------------------------------------------------------
 
@@ -108,7 +141,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `login`, `password`, `name`, `last_name`, `birth_date`, `email`, `address`, `phone`) VALUES
 (1, 'max_max', '12345', 'max', 'drob', '05/03/95', 'drobmax@mail.ru', 'minsk', '+375445829192'),
-(2, 'igorsheyko', '1234', 'lololoo', 'sadasd', 'asdasd', 'asdfasfds', 'sadfasdf', 'asdasd');
+(2, 'igorsheyko', '1234', 'lololoo', 'sadasd', 'asdasd', 'asdfasfds', 'sadfasdf', 'asdasd'),
+(3, 'user1', 'password1', 'name1', 'ln1', '12/13/2001', 'user1@mail.ru', 'asdfgjh', '7566567368263748');
 
 --
 -- Indexes for dumped tables
@@ -131,6 +165,7 @@ ALTER TABLE `favorite_category`
 -- Indexes for table `favorite_post`
 --
 ALTER TABLE `favorite_post`
+  ADD UNIQUE KEY `user_id_2` (`user_id`,`post_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `post_id` (`post_id`);
 
@@ -166,22 +201,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `feadback`
 --
 ALTER TABLE `feadback`
-  MODIFY `feadback_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `feadback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
