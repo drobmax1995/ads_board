@@ -7,13 +7,13 @@
 (def mysql-db {:subprotocol "mysql"
                :subname "//localhost:3306/ad_db"
                :user "root"
-               :password "1111"
+               :password ""
                :zeroDateTimeBehavior "convertToNull"})
 
 (defn show [id]
   (def u (jdbc/query mysql-db
       (sql/select * :users (sql/where {:user_id id}))))
-  (layout/render "users.html" (merge {:id :login (nth u 0))}))
+  (layout/render "users.html" (merge {:id (:login (nth u 0))}))
   )
 
 (defn index []
