@@ -2,6 +2,7 @@
 	(:require [ads-board.dal.rep-protocol.users-protocol :as users-protocol] 
 		      [ads-board.dal.rep-protocol.base-protocol :as base-protocol]
 			  [ads-board.dal.dto.user :as user-dto]
+			  [clojure.java.jdbc.sql :as sql]
 			  [clojure.java.jdbc :as jdbc]))
 
 (deftype users-rep [db-spec]
@@ -9,10 +10,15 @@
 	;;base-rep-protocol implementaiton
 	base-protocol/base-rep-protocol
 
+	; (get-items [this]
+	; 	(def u (jdbc/query db-spec
+ ;           (sql/select * :users )))
+	; 	   ((nth u 0)))
+
 	(get-items [this] 
 		(jdbc/query db-spec 
-             ["SELECT user_id, login, password, name, last_name, birth_date, email, address, phone FROM users"]
-             {:row-fn #(user-dto/->user
+            ["SELECT user_id, login, password, name, last_name, birth_date, email, address, phone FROM users"]
+             :row-fn #(user-dto/->user
 			 	(:user_id %1)
 			 	(:login %1)
 			 	(:password %1)
@@ -21,12 +27,12 @@
 			 	(:birth_date %1)
 			 	(:email %1)
 			 	(:address %1)
-			 	(:phone %1))}))
+			 	(:phone %1))))
 
 	(get-item [this id]
 		(jdbc/query db-spec
              ["SELECT user_id, login, password, name, last_name, birth_date, email, address, phone FROM users WHERE user_id = ?" id]
-             {:row-fn #(user-dto/->user
+             :row-fn #(user-dto/->user
 			 	(:user_id %1)
 			 	(:login %1)
 			 	(:password %1)
@@ -35,7 +41,7 @@
 			 	(:birth_date %1)
 			 	(:email %1)
 			 	(:address %1)
-			 	(:phone %1))}))
+			 	(:phone %1))))
 
 	(insert-item [this newItem]
 		(jdbc/insert! db-spec :Users {
@@ -69,7 +75,7 @@
 	(get-by-email [this email]
 		(jdbc/query db-spec 
              ["SELECT user_id, login, password, name, last_name, birth_date, email, address, phone FROM users WHERE email = ?" email]
-             {:row-fn #(user-dto/->user
+             :row-fn #(user-dto/->user
 			 	(:user_id %1)
 			 	(:login %1)
 			 	(:password %1)
@@ -78,4 +84,4 @@
 			 	(:birth_date %1)
 			 	(:email %1)
 			 	(:address %1)
-			 	(:phone %1))})))
+			 	(:phone %1)))))

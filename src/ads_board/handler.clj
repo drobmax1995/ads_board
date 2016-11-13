@@ -12,7 +12,7 @@
 
  
             ;;import for users
-
+            
             [ads-board.dal.db-conf :as db]
             [ads-board.logic.services.users-service :as users-service]
             [ads-board.dal.dto.user :as user]
@@ -27,7 +27,7 @@
 
 (defroutes app-routes
  ;; (GET "/user/:id" [id] (user/show id))
-  (GET "/users" [] (.get-items users-service))
+  (GET "/users" [] (layout/render "users.html" (.get-items users-service)))
   (GET "/ads" [] (ad/ads))
   (GET "/feadback" [] (feadback/feadbacks))
   (GET "/category" [] (category/categories))
