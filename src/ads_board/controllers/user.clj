@@ -13,13 +13,16 @@
 (defn show [id]
   (def u (jdbc/query mysql-db
       (sql/select * :users (sql/where {:user_id id}))))
-  (layout/render "users.html" (merge {:id :login (nth u 0))}))
+  (layout/render "users.html" (merge {:id (:login (nth u 0))}))
   )
 
 (defn index []
   (jdbc/query mysql-db
     (sql/select * :users )))
 
+(defn index-page [] 
+  (layout/render
+    "home.html" {:docs "document"}))
 
 ; (defn start []
 ;   (layout/render "views/simple.html"))

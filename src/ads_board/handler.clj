@@ -1,6 +1,5 @@
 (ns ads-board.handler
   (:require [compojure.core :refer :all]
-            [ads-board.layout :refer [error-page]]
             [compojure.route :as route]
             [clojure.java.io :as io]
             [ring.util.response :as resp]
@@ -17,8 +16,9 @@
   (GET "/ads" [] (ad/ads))
   (GET "/feadback" [] (feadback/feadbacks))
   (GET "/category" [] (category/categories))
-  (GET "/" [] (layout/render "simple.html"))
+  (GET "/" [] (user/index-page))
   (route/not-found "Not Found"))
 
 (def app
   (wrap-defaults app-routes site-defaults))
+
