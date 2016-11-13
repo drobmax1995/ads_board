@@ -12,6 +12,7 @@
                  [org.clojure/java.jdbc "0.3.0-alpha5"]
                  [mysql/mysql-connector-java "5.1.25"]
                  [ring/ring-json "0.4.0"]
+
                  [selmer "1.0.9"]
                  [markdown-clj "0.9.89"]
                  [metosin/ring-http-response "0.8.0"]

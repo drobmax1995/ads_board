@@ -18,12 +18,17 @@
             [ads-board.dal.db-conf :as db]
             [ads-board.logic.services.users-service :as users-service]
             [ads-board.dal.dto.user :as user]
-            [ads-board.dal.rep.users-rep :as users-repo]]))
+            [ads-board.dal.rep.users-rep :as users-repo]))
 
 (def users-repository (users-repo/->users-rep db/db-spec))
 (def users-service (users-service/->users-service users-repository))
 (defn create-user ([login password name last_name birth_date email address phone] (user/->user nil login password name last_name birth_date email address phone))
           ([id login password name last_name birth_date email address phone] (user/->user id login password name last_name birth_date email address phone)))
+
+
+(def users-repository (users-repo/->users-rep db/db-spec))
+(def users-service (users-service/->users-service users-repository))
+
 
 (defroutes app-routes
  ;; (GET "/user/:id" [id] (user/show id))
@@ -41,7 +46,6 @@
                         (get-in request [:params :address]) 
                         (get-in request [:params :phone]))) 
                   (response/redirect (str "/users/" (get-in request [:params :login]) "/false/true"))))
-
 
 
 
