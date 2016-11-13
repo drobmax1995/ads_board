@@ -1,52 +1,62 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-	<h1>All Users</h1>
-	{% ifequal deleted "true" %}
-				<div class="row">
-					<div class="col-md-12">
-						<div class="alert alert-danger" >
-	  						 User with Id: <strong>{{param}}</strong> was deleted!
-						</div>
-					</div>
-				</div>
-	{% endifequal %}
+  <h1>All Users</h1>
+  {% ifequal deleted "true" %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger" >
+                 User with Id: <strong>{{param}}</strong> was deleted!
+            </div>
+          </div>
+        </div>
+  {% endifequal %}
 
-	{% ifequal added "true" %}
-				<div class="row">
-					<div class="col-md-12">
-						<div class="alert alert-success" >
-	  						 User with Login: <strong>{{param}}</strong> was created!
-						</div>
-					</div>
-				</div>
-	{% endifequal %}
+  {% ifequal added "true" %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success" >
+                 User with Login: <strong>{{param}}</strong> was created!
+            </div>
+          </div>
+        </div>
+  {% endifequal %}
 
-	<div class="table-responsive">
-		<table class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Login</th>
-					<th>Password</th>
-					<th>Seed</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for item in users %}
-					<tr>
-						<td> <a href="/user/{{item.id}}">{{item.id}}</a> </td>
-						<td> {{item.login}} </td>
-						<td> {{item.password}} </td>
-						<td> {{item.seed}} </td>
-					</tr>
-				{% endfor %}
-			</tbody>
- 		</table>
-	</div>
+  <div class="table-responsive">
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Login</th>
+          <th>Password</th>
+          <th>Name</th>
+          <th>Last Name</th>
+          <th>Birth data</th>
+          <th>E-mail</th>
+          <th>Address</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in users %}
+          <tr>
+            <td> <a href="/user/{{item.user_id}}">{{item.user_id}}</a> </td>
+            <td> {{item.login}} </td>
+            <td> {{item.password}} </td>
+            <td> {{item.name}} </td>
+            <td> {{item.last_name}} </td>
+            <td> {{item.birth_date}} </td>
+            <td> {{item.email}} </td>
+            <td> {{item.address}} </td>
+            <td> {{item.phone}} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-	<div>
-		<a href="/user/add" class="btn btn-primary">Add new user</a>
-	</div>
+  <div>
+    <a href="/user/add" class="btn btn-primary">Add new user</a>
+  </div>
 </div>
 {% endblock %}

@@ -44,7 +44,7 @@
 			 	(:phone %1))))
 
 	(insert-item [this newItem]
-		(jdbc/insert! db-spec :Users {
+		(jdbc/insert! db-spec :users {
 				:login (:login newItem) 
 				:password (:password newItem) 
 				:name (:name newItem)
