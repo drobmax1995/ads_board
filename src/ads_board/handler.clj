@@ -26,10 +26,6 @@
           ([id login password name last_name birth_date email address phone] (user/->user id login password name last_name birth_date email address phone)))
 
 
-(def users-repository (users-repo/->users-rep db/db-spec))
-(def users-service (users-service/->users-service users-repository))
-
-
 (defroutes app-routes
  ;; (GET "/user/:id" [id] (user/show id))
 
@@ -45,8 +41,8 @@
                         (get-in request [:params :email])
                         (get-in request [:params :address]) 
                         (get-in request [:params :phone]))) 
-                  (response/redirect (str "/users/" (get-in request [:params :login]) "/false/true"))))
-
+                  (response/redirect (str "/users/" (get-in request [:params :id]) "/false/true"))))
+  (GET "/user/:id" [id] (view/user-page (.get-item users-service id) false))
 
 
   (GET "/ads" [] (ad/ads))

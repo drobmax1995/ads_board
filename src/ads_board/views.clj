@@ -14,3 +14,7 @@
 (defn add-user-page []
 	(layout/render
 		"users/add_user.html"))
+
+(defn user-page [user updated]
+	(layout/render
+		"users/user.html" {:user user :updated updated}))
