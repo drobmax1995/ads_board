@@ -10,11 +10,6 @@
 	;;base-rep-protocol implementaiton
 	base-protocol/base-rep-protocol
 
-	; (get-items [this]
-	; 	(def u (jdbc/query db-spec
- ;           (sql/select * :users )))
-	; 	   ((nth u 0)))
-
 	(get-items [this] 
 		(jdbc/query db-spec 
             ["SELECT user_id, login, password, name, last_name, birth_date, email, address, phone FROM users"]

@@ -13,15 +13,27 @@
             [ads-board.controllers.feadback :as feadback]
 
  
-            ;;import for users
-            
             [ads-board.dal.db-conf :as db]
+
+            ;;import for users
+
             [ads-board.logic.services.users-service :as users-service]
             [ads-board.dal.dto.user :as user]
-            [ads-board.dal.rep.users-rep :as users-repo]))
+            [ads-board.dal.rep.users-rep :as users-repo]
+             
+             ;;import for posts
+
+            [ads-board.logic.services.posts-service :as posts-service]
+            [ads-board.dal.dto.post :as post]
+            [ads-board.dal.rep.posts-rep :as posts-repo]))
 
 (def users-repository (users-repo/->users-rep db/db-spec))
 (def users-service (users-service/->users-service users-repository))
+
+(def posts-repository (posts-repo/->posts-rep db/db-spec))
+(def posts-service (posts-service/->posts-service posts-repository))
+
+
 (defn create-user ([login password name last_name birth_date email address phone] (user/->user nil login password name last_name birth_date email address phone))
           ([id login password name last_name birth_date email address phone] (user/->user id login password name last_name birth_date email address phone)))
 
@@ -31,6 +43,9 @@
 
 
   (GET "/users" [] (view/all-users-page (.get-items users-service) false false nil))
+  
+  (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
+
   (GET "/user/add" [] (view/add-user-page))
   (POST "/user/add" request (do (.insert-item users-service (create-user 
                         (get-in request [:params :login]) 

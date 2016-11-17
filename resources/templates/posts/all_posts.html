@@ -26,23 +26,28 @@
 		<table class="table table-hover table-condensed">
 			<thead>
 				<tr>
-					<th>Id</th>
-					<th>Name</th>
-					<th>Text</th>
-					<th>Creation Date</th>
-					<th>User</th>
-					<th>Rating</th>
+					<th>ID</th>
+					<th>user_id</th>
+					<th>category_id</th>
+					<th>title</th>
+					<th>description</th>
+					<th>status</th>
+					<th>created_at</th>
+					<th>updated_at</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for item in posts %}
 					<tr>
-						<td> <a href="/post/{{item.id}}">{{item.id}}</a> </td>
-						<td> {{item.name}} </td>
-						<td> {{item.text}} </td>
-						<td> {{item.creation-date}} </td>
-						<td> {{item.user-id}} </td>
-						<td> {{item.rating}} </td>
+						<td> <a href="/post/{{item.post_id}}">{{item.post_id}}</a> </td>
+						<td> {{item.user_id}} </td>
+						<td> {{item.category_id}} </td>
+						<td> {{item.title}} </td>
+						<td> {{item.description}} </td>
+						<td> {{item.status}} </td>
+						<td> {{item.created_at}} </td>
+						<td> {{item.updated_at}} </td>
+
 					</tr>
 				{% endfor %}
 			</tbody>
