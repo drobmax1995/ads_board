@@ -38,7 +38,6 @@
 
 	(insert-item [this newItem]
 		(jdbc/insert! db-spec :posts {
-				:post_id (:post_id newItem) 
 				:user_id (:user_id newItem) 
 				:category_id (:category_id newItem)
 				:title (:title newItem)

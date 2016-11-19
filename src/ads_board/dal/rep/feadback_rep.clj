@@ -31,8 +31,7 @@
 			 	(:body %1))))
 
 	(insert-item [this newItem]
-		(jdbc/insert! db-spec :feadback {
-				:feadback_id (:feadback_id newItem) 
+		(jdbc/insert! db-spec :feadback { 
 				:post_id (:post_id newItem) 
 				:created_at (:created_at newItem)
 				:body (:body newItem)

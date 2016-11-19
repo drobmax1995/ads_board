@@ -16,9 +16,27 @@
             [ads-board.logic.services.users-service :as users-service]
             [ads-board.dal.dto.user :as user]
             [ads-board.dal.rep.users-rep :as users-repo]
+
+            ;;import for category
+
+            [ads-board.logic.services.category-service :as category-service]
+            [ads-board.dal.dto.category :as category]
+            [ads-board.dal.rep.category-rep :as category-repo]
+
+            ;;import for favorite_category
+
+            [ads-board.logic.services.favorite-category-service :as favorite-category-service]
+            [ads-board.dal.dto.favorite-category :as favorite-category]
+            [ads-board.dal.rep.favorite-category-rep :as favorite-category-repo]
              
 
-             ;;import for feadback
+             ;;import for favorite-post
+
+            [ads-board.logic.services.favorite-post-service :as favorite-post-service]
+            [ads-board.dal.dto.favorite-post :as favorite-post]
+            [ads-board.dal.rep.favorite-post-rep :as favorite-post-repo]
+
+            ;;import for feadback
 
             [ads-board.logic.services.feadback-service :as feadback-service]
             [ads-board.dal.dto.feadback :as feadback]
@@ -31,6 +49,8 @@
             [ads-board.dal.dto.post :as post]
             [ads-board.dal.rep.posts-rep :as posts-repo]))
 
+
+
 (def users-repository (users-repo/->users-rep db/db-spec))
 (def users-service (users-service/->users-service users-repository))
 
@@ -39,6 +59,15 @@
 
 (def feadback-repository (feadback-repo/->feadback-rep db/db-spec))
 (def feadback-service (feadback-service/->feadback-service feadback-repository))
+
+(def category-repository (category-repo/->category-rep db/db-spec))
+(def category-service (category-service/->category-service category-repository))
+
+(def favorite-category-repository (favorite-category-repo/->favorite-category-rep db/db-spec))
+(def favorite-category-service (favorite-category-service/->favorite-category-service favorite-category-repository))
+
+(def favorite-post-repository (favorite-post-repo/->favorite-post-rep db/db-spec))
+(def favorite-post-service (favorite-post-service/->favorite-post-service favorite-post-repository))
 
 
 (defn create-user ([login password name last_name birth_date email address phone] (user/->user nil login password name last_name birth_date email address phone))
