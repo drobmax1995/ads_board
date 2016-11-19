@@ -28,21 +28,19 @@
 				<tr>
 					<th>Id</th>
 					<th>UserId</th>
-					<th>Text</th>
-					<th>CreationDate</th>
-					<th>Rating</th>
-					<th>PostId</th>
+					<th>PostID</th>
+					<th>CreatedAt</th>
+					<th>Body</th>
 				</tr>
 			</thead>
 			<tbody>
-				{% for item in comments %}
+				{% for item in feadback %}
 					<tr>
-						<td> <a href="/comment/{{item.id}}">{{item.id}}</a> </td>
-						<td> {{item.user-id}} </td>
-						<td> {{item.text}} </td>
-						<td> {{item.creation-date}} </td>
-						<td> {{item.rating}} </td>
-						<td> {{item.post-id}} </td>
+						<td> <a href="/comment/{{item.feadback_id}}">{{item.feadback_id}}</a> </td>
+						<td> {{item.user_id}} </td>
+						<td> {{item.post_id}} </td>
+						<td> {{item.created_at}} </td>
+						<td> {{item.body}} </td>
 					</tr>
 				{% endfor %}
 			</tbody>

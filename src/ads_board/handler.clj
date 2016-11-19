@@ -8,10 +8,6 @@
             [ring.util.response :as resp]
             [ads-board.layout :as layout]
             [ads-board.views :as view]
-            [ads-board.controllers.ad :as ad]
-            [ads-board.controllers.category :as category]
-            [ads-board.controllers.feadback :as feadback]
-
  
             [ads-board.dal.db-conf :as db]
 
@@ -21,6 +17,14 @@
             [ads-board.dal.dto.user :as user]
             [ads-board.dal.rep.users-rep :as users-repo]
              
+
+             ;;import for feadback
+
+            [ads-board.logic.services.feadback-service :as feadback-service]
+            [ads-board.dal.dto.feadback :as feadback]
+            [ads-board.dal.rep.feadback-rep :as feadback-repo]
+
+
              ;;import for posts
 
             [ads-board.logic.services.posts-service :as posts-service]
@@ -32,6 +36,9 @@
 
 (def posts-repository (posts-repo/->posts-rep db/db-spec))
 (def posts-service (posts-service/->posts-service posts-repository))
+
+(def feadback-repository (feadback-repo/->feadback-rep db/db-spec))
+(def feadback-service (feadback-service/->feadback-service feadback-repository))
 
 
 (defn create-user ([login password name last_name birth_date email address phone] (user/->user nil login password name last_name birth_date email address phone))
@@ -47,6 +54,7 @@
   (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
 
   (GET "/user/add" [] (view/add-user-page))
+
   (POST "/user/add" request (do (.insert-item users-service (create-user 
                         (get-in request [:params :login]) 
                         (get-in request [:params :password])
@@ -57,12 +65,11 @@
                         (get-in request [:params :address]) 
                         (get-in request [:params :phone]))) 
                   (response/redirect (str "/users/" (get-in request [:params :id]) "/false/true"))))
+
   (GET "/user/:id" [id] (view/user-page (.get-item users-service id) false))
 
+  (GET "/feadback" [] (view/all-feadback-page (.get-items feadback-service) false false nil))
 
-  (GET "/ads" [] (ad/ads))
-  (GET "/feadback" [] (feadback/feadbacks))
-  (GET "/category" [] (category/categories))
   (GET "/" [] (layout/render
     "home.html" {:docs "document"}))
   (route/not-found "Not Found"))

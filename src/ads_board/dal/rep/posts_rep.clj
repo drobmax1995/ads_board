@@ -61,7 +61,7 @@
 	(delete-item [this id]
 		(jdbc/delete! db-spec :users ["post_id = ?" id]))
 
-	;;users-rep-protocol implementation
+	;;posts-rep-protocol implementation
 	posts-protocol/posts-rep-protocol
 
 	(get-by-user-id [this user_id]
