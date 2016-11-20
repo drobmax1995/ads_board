@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2016 at 07:12 PM
+-- Generation Time: Nov 20, 2016 at 08:46 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -102,7 +102,7 @@ CREATE TABLE `posts` (
   `category_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` varchar(1000) NOT NULL,
-  `status` enum('pending','approoved','booked','archived') NOT NULL,
+  `status` text NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,17 +132,19 @@ CREATE TABLE `users` (
   `birth_date` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL
+  `phone` varchar(100) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `login`, `password`, `name`, `last_name`, `birth_date`, `email`, `address`, `phone`) VALUES
-(1, 'max_max', '12345', 'max', 'drob', '05/03/95', 'drobmax@mail.ru', 'minsk', '+375445829192'),
-(2, 'igorsheyko', '1234', 'lololoo', 'sadasd', 'asdasd', 'asdfasfds', 'sadfasdf', 'asdasd'),
-(3, 'user1', 'password1', 'name1', 'ln1', '12/13/2001', 'user1@mail.ru', 'asdfgjh', '7566567368263748');
+INSERT INTO `users` (`user_id`, `login`, `password`, `name`, `last_name`, `birth_date`, `email`, `address`, `phone`, `is_admin`) VALUES
+(1, 'max_max', '12345', 'max', 'drob', '05/03/95', 'drobmax@mail.ru', 'minsk', '+375445829192', 0),
+(2, 'igorsheyko', '1234', 'lololoo', 'sadasd', 'asdasd', 'asdfasfds', 'sadfasdf', 'asdasd', 0),
+(3, 'user1', 'password1', 'name1', 'ln1', '12/13/2001', 'user1@mail.ru', 'asdfgjh', '7566567368263748', 0),
+(4, 'art', 'asdasdasd', 'art', 'basov', '12jn', 'zkfsdfk@ksdjnf.cv', 'dlkjdkewljlwek', '324234234', 0);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +218,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
