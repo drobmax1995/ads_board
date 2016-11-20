@@ -21,7 +21,7 @@
                  [org.webjars/font-awesome "4.6.3"]
                  [org.webjars.bower/tether "1.3.7"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [hiccup "1.0.5"]]
+                 [hiccup-bootstrap "0.1.2"]]
   
   :ring {:handler ads-board.handler/app}
   :profiles

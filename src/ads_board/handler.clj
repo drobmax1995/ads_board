@@ -1,6 +1,8 @@
 (ns ads-board.handler
+  (:use compojure.core)
   (:require [ring.util.response :as response]
             [ring.middleware.json :as middleware]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :as handler]
@@ -73,14 +75,14 @@
 (defn create-user ([login password name last_name birth_date email address phone] (user/->user nil login password name last_name birth_date email address phone))
           ([id login password name last_name birth_date email address phone] (user/->user id login password name last_name birth_date email address phone)))
 
+(defn create-post ([user_id category_id title description status created_at updated_at] (post/->post nil user_id category_id title description status created_at updated_at))
+          ([id user_id category_id title description status created_at updated_at] (post/->post id user_id category_id title description status created_at updated_at)))
 
 (defroutes app-routes
  ;; (GET "/user/:id" [id] (user/show id))
 
 
   (GET "/users" [] (view/all-users-page (.get-items users-service) false false nil))
-  
-  (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
 
   (GET "/user/add" [] (view/add-user-page))
 
@@ -96,6 +98,26 @@
                   (response/redirect (str "/users/" (get-in request [:params :id]) "/false/true"))))
 
   (GET "/user/:id" [id] (view/user-page (.get-item users-service id) false))
+  (GET "/login" [] (view/login))
+  
+  (POST "/login" request (users/login 
+    request #(layout/render "login.html" (merge {:error-message "no user with such credentials"})) #(redirect "/")))
+
+  (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
+
+  (GET "/post/add" [] (view/add-post-page))
+
+  (POST "/post/add" request (do (.insert-item posts-service (create-post 
+                  (get-in request [:params :user_id])
+                  (get-in request [:params :category_id])
+                  (get-in request [:params :title])
+                  (get-in request [:params :status])
+                  (get-in request [:params :description])
+                  (get-in request [:params :created_at])
+                  (get-in request [:params :updated_at])))
+                  (response/redirect (str "/posts/"))))
+
+  (GET "/post/:id" [id] (view/post-page (.get-item posts-service id) false))
 
   (GET "/feadback" [] (view/all-feadback-page (.get-items feadback-service) false false nil))
 
@@ -106,5 +128,6 @@
 ; (def app
 ;   (wrap-defaults app-routes site-defaults))
 
-(def app  
-  (-> (handler/site app-routes) (middleware/wrap-json-body {:keywords? true})))
+(def app
+  (-> app-routes
+      (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))))

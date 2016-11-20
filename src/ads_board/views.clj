@@ -21,11 +21,22 @@
 	(layout/render
 		"users/user.html" {:user user :updated updated}))
 
+(defn login []
+	(layout/render
+		"users/login.html"))
 ;;posts
 
 (defn all-posts-page [posts deleted added param]
 	(layout/render
 		"posts/all_posts.html" {:posts posts :deleted deleted :added added :param param}))
+
+(defn add-post-page []
+	(layout/render
+		"posts/add_post.html"))
+
+(defn post-page [post updated]
+	(layout/render
+		"posts/post.html" {:post post :updated updated}))
 
 ;;feadback
 
