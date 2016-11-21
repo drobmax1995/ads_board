@@ -58,7 +58,7 @@
 			["post_id = ?" (:post_id updatedItem)]))
 
 	(delete-item [this id]
-		(jdbc/delete! db-spec :users ["post_id = ?" id]))
+		(jdbc/delete! db-spec :posts ["post_id = ?" id]))
 
 	;;posts-rep-protocol implementation
 	posts-protocol/posts-rep-protocol

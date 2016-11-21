@@ -122,7 +122,8 @@
 
   (GET "/post/add" [] (view/add-post-page))
 
-  (POST "/post/add" request (do (.insert-item posts-service (create-post 
+  (POST "/post/add" request (do (.insert-item posts-service (post/->post
+                        nil 
                   (get-in request [:params :user_id])
                   (get-in request [:params :category_id])
                   (get-in request [:params :title])
@@ -130,7 +131,22 @@
                   (get-in request [:params :description])
                   (get-in request [:params :created_at])
                   (get-in request [:params :updated_at])))
-                  (response/redirect (str "/posts/"))))
+                  (response/redirect "/posts")))
+
+  (POST "/post/update" request (do (.update-item posts-service (post/->post
+                  (get-in request [:params :post_id]) 
+                  (get-in request [:params :user_id])
+                  (get-in request [:params :category_id])
+                  (get-in request [:params :title])
+                  (get-in request [:params :status])
+                  (get-in request [:params :description])
+                  (get-in request [:params :created_at])
+                  (get-in request [:params :updated_at])))
+                  (response/redirect "/posts")))
+
+  (POST "/post/delete" request (do (.delete-item posts-service 
+                        (get-in request [:params :post_id]))
+                 (response/redirect "/posts")))
 
   (GET "/post/:id" [id] (view/post-page (.get-item posts-service id) false))
 
