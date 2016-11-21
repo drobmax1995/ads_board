@@ -36,7 +36,7 @@
 			<tbody>
 				{% for item in feadback %}
 					<tr>
-						<td> <a href="/comment/{{item.feadback_id}}">{{item.feadback_id}}</a> </td>
+						<td> <a href="/feadback/{{item.feadback_id}}">{{item.feadback_id}}</a> </td>
 						<td> {{item.user_id}} </td>
 						<td> {{item.post_id}} </td>
 						<td> {{item.created_at}} </td>
@@ -48,7 +48,7 @@
 	</div>
 
 	<div>
-		<a href="/comment/add" class="btn btn-primary">Add new comment</a>
+		<a href="/feadback/add" class="btn btn-primary">Add new comment</a>
 	</div>
 </div>
 {% endblock %}
