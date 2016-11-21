@@ -39,11 +39,11 @@
 
 	(update-item [this updatedItem] 
 		(jdbc/update! db-spec :feadback {
-				:feadback_id (:feadback_id updatedItem) 
+				:user_id (:user_id updatedItem) 
 				:post_id (:post_id updatedItem) 
 				:created_at (:created_at updatedItem)
 				:body (:body updatedItem)}
-			["user_id = ?" (:user_id updatedItem)]))
+			["feadback_id = ?" (:feadback_id updatedItem)]))
 
 	(delete-item [this id]
 		(jdbc/delete! db-spec :feadback ["feadback_id = ?" id]))

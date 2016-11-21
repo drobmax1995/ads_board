@@ -79,9 +79,9 @@
           ([id user_id category_id title description status created_at updated_at] (post/->post id user_id category_id title description status created_at updated_at)))
 
 (defroutes app-routes
- ;; (GET "/user/:id" [id] (user/show id))
+  
 
-
+  ;; users
   (GET "/users" [] (view/all-users-page (.get-items users-service) false false nil))
 
   (GET "/user/add" [] (view/add-user-page))
@@ -116,12 +116,8 @@
 
   (GET "/user/:id" [id] (view/user-page (.get-item users-service id) false))
 
-  
   (GET "/login" [] (view/login))
   
-  ; (POST "/login" request (users/login 
-  ;   request #(layout/render "login.html" (merge {:error-message "no user with such credentials"})) #(redirect "/")))
-
   (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
 
   (GET "/post/add" [] (view/add-post-page))
@@ -138,7 +134,33 @@
 
   (GET "/post/:id" [id] (view/post-page (.get-item posts-service id) false))
 
-  (GET "/feadback" [] (view/all-feadback-page (.get-items feadback-service) false false nil))
+  ;;comments
+
+  (GET "/feadback" [] (view/all-feadbacks-page (.get-items feadback-service) false false nil))
+
+  (GET "/feadback/add" [] (view/add-feadback-page))
+
+  (POST "/feadback/add" request (do (.insert-item feadback-service (feadback/->feadback
+                        nil
+                        (get-in request [:params :post_id])
+                        (get-in request [:params :user_id])
+                        (get-in request [:params :created_at])
+                        (get-in request [:params :body]))) 
+                  (response/redirect "/feadback")))
+
+  (POST "/feadback/update" request (do (.update-item feadback-service (feadback/->feadback
+                        (get-in request [:params :feadback_id])
+                        (get-in request [:params :post_id])
+                        (get-in request [:params :user_id])
+                        (get-in request [:params :created_at])
+                        (get-in request [:params :body])))
+                  (response/redirect "/feadback")))
+
+  (POST "/feadback/delete" request (do (.delete-item feadback-service 
+                        (get-in request [:params :feadback_id]))
+                 (response/redirect "/feadback")))
+
+  (GET "/feadback/:id" [id] (view/feadback-page (.get-item feadback-service id) false))
 
   (GET "/" [] (layout/render
     "home.html" {:docs "document"}))
