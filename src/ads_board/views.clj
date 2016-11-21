@@ -40,6 +40,14 @@
 
 ;;feadback
 
-(defn all-feadback-page [feadback deleted added param]
+(defn all-feadbacks-page [feadback deleted added param]
 	(layout/render
-		"comments/all_comments.html" {:feadback feadback :deleted deleted :added added :param param}))
+		"feadbacks/all_feadbacks.html" {:feadback feadback :deleted deleted :added added :param param}))
+
+(defn add-feadback-page []
+	(layout/render
+		"feadbacks/add_feadback.html"))
+
+(defn feadback-page [feadback updated]
+	(layout/render
+		"feadbacks/feadback.html" {:feadback feadback :updated updated}))
