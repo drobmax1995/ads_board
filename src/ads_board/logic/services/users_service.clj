@@ -4,6 +4,7 @@
 			  [ads-board.dal.rep.users-rep :as users-repo]))
 
 (deftype users-service [users-repo] 
+
 	base-protocol/base-service-protocol
 
 	(get-items [this] 

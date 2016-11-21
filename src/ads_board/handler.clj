@@ -86,7 +86,20 @@
 
   (GET "/user/add" [] (view/add-user-page))
 
-  (POST "/user/add" request (do (.insert-item users-service (create-user 
+  (POST "/user/add" request (do (.insert-item users-service (user/->user
+                        nil
+                        (get-in request [:params :login])
+                        (get-in request [:params :password])
+                        (get-in request [:params :name])
+                        (get-in request [:params :last_name])
+                        (get-in request [:params :birth_date]) 
+                        (get-in request [:params :email])
+                        (get-in request [:params :address]) 
+                        (get-in request [:params :phone]))) 
+                  (response/redirect "/users")))
+
+  (POST "/user/update" request (do (.update-item users-service (user/->user
+                        (get-in request [:params :user_id]) 
                         (get-in request [:params :login]) 
                         (get-in request [:params :password])
                         (get-in request [:params :name]) 
@@ -95,13 +108,19 @@
                         (get-in request [:params :email])
                         (get-in request [:params :address]) 
                         (get-in request [:params :phone]))) 
-                  (response/redirect (str "/users/" (get-in request [:params :id]) "/false/true"))))
+                  (response/redirect "/users")))
+
+  (POST "/user/delete" request (do (.delete-item users-service 
+                        (get-in request [:params :user_id]))
+                 (response/redirect "/users")))
 
   (GET "/user/:id" [id] (view/user-page (.get-item users-service id) false))
+
+  
   (GET "/login" [] (view/login))
   
-  (POST "/login" request (users/login 
-    request #(layout/render "login.html" (merge {:error-message "no user with such credentials"})) #(redirect "/")))
+  ; (POST "/login" request (users/login 
+  ;   request #(layout/render "login.html" (merge {:error-message "no user with such credentials"})) #(redirect "/")))
 
   (GET "/posts" [] (view/all-posts-page (.get-items posts-service) false false nil))
 
