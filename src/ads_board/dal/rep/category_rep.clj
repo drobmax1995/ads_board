@@ -33,6 +33,6 @@
 			["category_id = ?" (:category_id updatedItem)]))
 
 	(delete-item [this id]
-		(jdbc/delete! db-spec :feadback ["category_id = ?" id]))
+		(jdbc/delete! db-spec :category ["category_id = ?" id]))
 
 )

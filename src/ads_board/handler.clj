@@ -162,6 +162,30 @@
 
   (GET "/feadback/:id" [id] (view/feadback-page (.get-item feadback-service id) false))
 
+  ;;category
+
+  (GET "/categories" [] (view/all-categories-page (.get-items category-service) false false nil))
+
+  (GET "/category/add" [] (view/add-category-page))
+
+  (POST "/category/add" request (do (.insert-item category-service (category/->category
+                        nil
+                        (get-in request [:params :c_name]))) 
+                  (response/redirect "/categories")))
+
+  (POST "/category/update" request (do (.update-item category-service (category/->category
+                        (get-in request [:params :category_id])
+                        (get-in request [:params :c_name])))
+                  (response/redirect "/categories")))
+
+  (POST "/category/delete" request (do (.delete-item category-service 
+                        (get-in request [:params :category_id]))
+                 (response/redirect "/categories")))
+
+  (GET "/category/:id" [id] (view/category-page (.get-item category-service id) false))
+
+  
+
   (GET "/" [] (layout/render
     "home.html" {:docs "document"}))
   (route/not-found "Not Found"))
