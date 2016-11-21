@@ -51,3 +51,17 @@
 (defn feadback-page [feadback updated]
 	(layout/render
 		"feadbacks/feadback.html" {:feadback feadback :updated updated}))
+
+;; categories
+
+(defn all-categories-page [category deleted added param]
+	(layout/render
+		"categories/all_categories.html" {:category category :deleted deleted :added added :param param}))
+
+(defn add-category-page []
+	(layout/render
+		"categories/add_category.html"))
+
+(defn category-page [category updated]
+	(layout/render
+		"categories/category.html" {:category category :updated updated}))
