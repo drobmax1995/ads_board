@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2016 at 08:46 PM
+-- Generation Time: Nov 23, 2016 at 08:54 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -36,13 +36,18 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `c_name`) VALUES
-(1, ''),
-(2, 'home'),
-(3, 'office'),
-(4, 'food'),
-(5, 'cars'),
+(12, '2'),
+(8, 'asdasd'),
 (6, 'building'),
-(7, 'lolol');
+(5, 'cars'),
+(9, 'dsadasd'),
+(1, 'dsadasdkkkkkkkkkk'),
+(4, 'food'),
+(10, 'hnghjgjhgjh'),
+(2, 'home'),
+(11, 'jhgjhjg'),
+(7, 'lolol'),
+(3, 'office');
 
 -- --------------------------------------------------------
 
@@ -54,6 +59,15 @@ CREATE TABLE `favorite_category` (
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `favorite_category`
+--
+
+INSERT INTO `favorite_category` (`user_id`, `category_id`) VALUES
+(1, 1),
+(1, 2),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -85,10 +99,12 @@ CREATE TABLE `feadback` (
 --
 
 INSERT INTO `feadback` (`feadback_id`, `post_id`, `user_id`, `created_at`, `body`) VALUES
-(1, 1, 3, '2016-11-10', 'lol '),
+(1, 1, 3, '2016-11-10', 'lol lol'),
 (2, 1, 2, '2016-11-09', 'azuz azazaza'),
 (3, 1, 2, '2016-11-16', 'kek'),
-(4, 1, 3, '2016-11-12', 'shlabudabuda');
+(4, 1, 3, '2016-11-12', 'shlabudabuda'),
+(5, 3, 2, '2012-12-12', 'qweqwe'),
+(8, 1, 1, '2012-12-12', 'hgfghf');
 
 -- --------------------------------------------------------
 
@@ -102,20 +118,21 @@ CREATE TABLE `posts` (
   `category_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` varchar(1000) NOT NULL,
-  `status` text NOT NULL,
   `created_at` date NOT NULL,
-  `updated_at` date NOT NULL
+  `updated_at` date NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `user_id`, `category_id`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'post1', 'khdfjsgadhfh adsfjasdgfhjgasdhf sjhfghasd fjhsadgfygeuegfsdhjgf sdjhfghjsagf sjhfdg sdfjhgsfhgsdhfghasgf ', 'pending', '2016-11-12', '2016-11-13'),
-(2, 1, 6, 'asdfsdfg', 'dsfefuweiou886437865764756783645876783468', 'approoved', '2016-11-01', '2016-11-02'),
-(3, 2, 2, 'title title title', 'deicrkshdjfh dfsakjasdf as7sdaf sadf7f 34 43 43 4 4 4 4 43 43 4 43 43 43 43 43 43', 'approoved', '2016-11-03', '2016-11-03'),
-(4, 2, 3, 'tttr', 'wertwerxecfer', 'approoved', '2016-11-08', '2016-11-08');
+INSERT INTO `posts` (`post_id`, `user_id`, `category_id`, `title`, `description`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, 1, 'post1', 'khdfjsgadhfh adsfjasdgfhjgasdhf sjhfghasd fjhsadgfygeuegfsdhjgf sdjhfghjsagf sjhfdg sdfjhgsfhgsdhfghasgf ', '2016-11-12', '2016-11-13', 'new'),
+(2, 1, 6, 'asdfsdfg', 'dsfefuweiou886437865764756783645876783468', '2016-11-01', '2016-11-02', 'new'),
+(3, 2, 2, 'title title title', 'deicrkshdjfh dfsakjasdf as7sdaf sadf7f 34 43 43 4 4 4 4 43 43 4 43 43 43 43 43 43', '2016-11-03', '2016-11-03', 'new'),
+(4, 2, 3, 'tttr', 'wertwerxecfer', '2016-11-08', '2016-11-08', 'new'),
+(5, 1, 1, 'new post', 'new', '2012-12-12', '2012-12-12', 'new');
 
 -- --------------------------------------------------------
 
@@ -141,10 +158,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `login`, `password`, `name`, `last_name`, `birth_date`, `email`, `address`, `phone`, `is_admin`) VALUES
-(1, 'max_max', '12345', 'max', 'drob', '05/03/95', 'drobmax@mail.ru', 'minsk', '+375445829192', 0),
+(1, 'max_max ugh', '12345', 'max', 'drob', '05/03/95', 'drobmax@mail.ru', 'minsk', '+375445829192', 0),
 (2, 'igorsheyko', '1234', 'lololoo', 'sadasd', 'asdasd', 'asdfasfds', 'sadfasdf', 'asdasd', 0),
 (3, 'user1', 'password1', 'name1', 'ln1', '12/13/2001', 'user1@mail.ru', 'asdfgjh', '7566567368263748', 0),
-(4, 'art', 'asdasdasd', 'art', 'basov', '12jn', 'zkfsdfk@ksdjnf.cv', 'dlkjdkewljlwek', '324234234', 0);
+(6, 'uytyytu', 'kjhjhhjk', 'kjjhghj', 'kjhjhkjkh', 'jbkjhkhjk', 'jhkjkhhjk', 'jhkkhjhjk', 'hjkjhkkhj', 0),
+(7, 'sdfsda', 'dgdfgdsf', 'sdfgsdf', 'sfdgdsfg', 'dsfgsdf', 'sfgdfg', 'sdfg', 'dfgsd', 0),
+(8, 'jhgjhg', 'jgjhg', 'jmghg', 'jhghj', 'jhghjg', 'kjhjgh', 'jghj', 'jghghj', 0),
+(9, 'max', 'qwewq', 'wqrwqe', 'eqwwe', 'qwewqe', 'weqweqwe', 'weqweqwe', 'eqweqweqwe', 0);
 
 --
 -- Indexes for dumped tables
@@ -154,13 +174,15 @@ INSERT INTO `users` (`user_id`, `login`, `password`, `name`, `last_name`, `birth
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`category_id`);
+  ADD PRIMARY KEY (`category_id`),
+  ADD UNIQUE KEY `c_name` (`c_name`);
 
 --
 -- Indexes for table `favorite_category`
 --
 ALTER TABLE `favorite_category`
-  ADD KEY `user_id` (`user_id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`,`category_id`),
+  ADD KEY `user_id` (`user_id`,`category_id`),
   ADD KEY `category_id` (`category_id`);
 
 --
@@ -193,7 +215,9 @@ ALTER TABLE `posts`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`) USING BTREE;
+  ADD PRIMARY KEY (`user_id`) USING BTREE,
+  ADD UNIQUE KEY `login` (`login`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -203,22 +227,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `feadback`
 --
 ALTER TABLE `feadback`
-  MODIFY `feadback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `feadback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
