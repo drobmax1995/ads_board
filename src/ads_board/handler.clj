@@ -129,8 +129,8 @@
                   (get-in request [:params :title])
                   (get-in request [:params :status])
                   (get-in request [:params :description])
-                  (get-in request [:params :created_at])
-                  (get-in request [:params :updated_at])))
+                  nil
+                  nil))
                   (response/redirect "/posts")))
 
   (POST "/post/update" request (do (.update-item posts-service (post/->post
@@ -141,7 +141,7 @@
                   (get-in request [:params :status])
                   (get-in request [:params :description])
                   (get-in request [:params :created_at])
-                  (get-in request [:params :updated_at])))
+                  nil))
                   (response/redirect "/posts")))
 
   (POST "/post/delete" request (do (.delete-item posts-service 

@@ -3,6 +3,8 @@
 			  [ads-board.logic.services-protocols.posts-protocol :as posts-protocol]
 			  [ads-board.dal.rep.posts-rep :as posts-repo]))
 
+(defn now [] (new java.util.Date))
+
 (deftype posts-service [posts-repo] 
 
 	base-protocol/base-service-protocol
@@ -14,10 +16,10 @@
 		(first (.get-item posts-repo id)))
 
 	(insert-item [this newItem]
-		(.insert-item posts-repo newItem))
+		(.insert-item posts-repo (assoc newItem :created_at (now) :updated_at (now))))
 
 	(update-item [this updatedItem]
-		(.update-item posts-repo updatedItem))
+		(.update-item posts-repo (assoc updatedItem :updated_at (now))))
 
 	(delete-item [this id]
 		(.delete-item posts-repo id))

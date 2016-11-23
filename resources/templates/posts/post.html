@@ -22,7 +22,7 @@
 						
 			<form action="/post/update" method="post">
 				<div class="form-group">
-					<input name="post_id" id="post_id" type="hidden" class="form-control" placeholder="Post Id" value="{{post.post_id}}">
+					<input name="post_id" id="post_id" type="hidden" class="form-control" placeholder="Post Id" value="{{post.post_id}}" readonly>
 					
 					<div class="row">
 						<div class="col-md-2">
@@ -44,7 +44,7 @@
 
 					<div class="row">
 						<div class="col-md-2">
-							<label for="status">Description </label>
+							<label for="status">Status </label>
 						</div>
 						<div class="col-md-4">
 							<textarea name="status" id="status"class="form-control">{{post.status}}</textarea> 
@@ -65,7 +65,7 @@
 							<label for="created_at">Creation date: </label>
 						</div>
 						<div class="col-md-4">
-							<input name="created_at" id="created_at" type="text" class="form-control" placeholder="Creation date" value="{{post.created_at}}">
+							<input name="created_at" id="created_at" type="text" class="form-control" placeholder="Creation date" value="{{post.created_at}}" readonly>
 						</div>
 					</div>
 
@@ -74,7 +74,7 @@
 							<label for="updated_at">Update date: </label>
 						</div>
 						<div class="col-md-4">
-							<input name="updated_at" id="updated_at" type="text" class="form-control" placeholder="Update date" value="{{post.updated_at}}">
+							<input name="updated_at" id="updated_at" type="text" class="form-control" placeholder="Update date" value="{{post.updated_at}}" readonly>
 						</div>
 					</div>
 
@@ -83,7 +83,7 @@
 							<label for="user_id">User Id: </label>
 						</div>
 						<div class="col-md-4">
-							<input name="user_id" id="user_id" type="number" class="form-control" value="{{post.user_id}}">
+							<input name="user_id" id="user_id" type="number" class="form-control" value="{{post.user_id}}" readonly>
 						</div>
 					</div>
 				</div>
