@@ -86,7 +86,8 @@
 
   (GET "/user/add" [] (view/add-user-page))
 
-  (POST "/user/add" request (do (.insert-item users-service (user/->user
+  (POST "/user/add" request (do 
+                        ( def result (.insert-item users-service (user/->user
                         nil
                         (get-in request [:params :login])
                         (get-in request [:params :password])
@@ -95,8 +96,9 @@
                         (get-in request [:params :birth_date]) 
                         (get-in request [:params :email])
                         (get-in request [:params :address]) 
-                        (get-in request [:params :phone]))) 
-                  (response/redirect "/users")))
+                        (get-in request [:params :phone]))) )
+                   (response/redirect (str "/users?" result) )
+                  ))
 
   (POST "/user/update" request (do (.update-item users-service (user/->user
                         (get-in request [:params :user_id]) 

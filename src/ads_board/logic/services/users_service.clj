@@ -1,7 +1,15 @@
 (ns ads-board.logic.services.users-service
+	;;(:gen-class)
+  (:import [java.lang Exception])
 	(:require [ads-board.logic.services-protocols.base-protocol :as base-protocol]
 			  [ads-board.logic.services-protocols.users-protocol :as users-protocol]
-			  [ads-board.dal.rep.users-rep :as users-repo]))
+			  [ads-board.dal.rep.users-rep :as users-repo]
+			  [ads-board.views :as view]))
+
+(defmacro try-request [& args]
+  `(try (~@args)
+     (catch Exception e#
+       (.getMessage e#))))
 
 (deftype users-service [users-repo] 
 
@@ -14,7 +22,11 @@
 		(first (.get-item users-repo id)))
 
 	(insert-item [this newItem]
-		(.insert-item users-repo newItem))
+		(try 
+			(.insert-item users-repo newItem)
+			"OK"
+		(catch Exception e#
+        (.getMessage e#))))
 
 	(update-item [this updatedItem]
 		(.update-item users-repo updatedItem))
