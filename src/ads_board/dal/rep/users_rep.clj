@@ -1,9 +1,19 @@
 (ns ads-board.dal.rep.users-rep
+	; ;;(:gen-class)
+ ;  (:import [java.sql SQLException])
 	(:require [ads-board.dal.rep-protocol.users-protocol :as users-protocol] 
 		      [ads-board.dal.rep-protocol.base-protocol :as base-protocol]
 			  [ads-board.dal.dto.user :as user-dto]
 			  [clojure.java.jdbc.sql :as sql]
-			  [clojure.java.jdbc :as jdbc]))
+			  [clojure.java.jdbc :as jdbc]
+			  [ads-board.views :as view]))
+
+; (defmacro try-sql
+;   [& args]
+;   `(try
+;   	(~@args)
+;      (catch SQLException e#
+;        (view/login))));(jdbc/print-sql-exception-chain e#))))
 
 (deftype users-rep [db-spec]
 
