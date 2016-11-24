@@ -24,7 +24,7 @@
 	(insert-item [this newItem]
 		(try 
 			(.insert-item users-repo newItem)
-			"OK"
+			nil
 		(catch Exception e#
         (.getMessage e#))))
 

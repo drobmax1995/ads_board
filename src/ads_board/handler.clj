@@ -87,7 +87,7 @@
   (GET "/user/add" [] (view/add-user-page))
 
   (POST "/user/add" request (do 
-                        ( def result (.insert-item users-service (user/->user
+    (def user-params (user/->user
                         nil
                         (get-in request [:params :login])
                         (get-in request [:params :password])
@@ -96,9 +96,10 @@
                         (get-in request [:params :birth_date]) 
                         (get-in request [:params :email])
                         (get-in request [:params :address]) 
-                        (get-in request [:params :phone]))) )
-                   (response/redirect (str "/users?" result) )
-                  ))
+                        (get-in request [:params :phone])))
+                        ( def result (.insert-item users-service user-params))
+                        (.println System/out (:login user-params))
+                   (view/add-user-page (merge result) user-params)))
 
   (POST "/user/update" request (do (.update-item users-service (user/->user
                         (get-in request [:params :user_id]) 

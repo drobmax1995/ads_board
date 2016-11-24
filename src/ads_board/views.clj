@@ -1,7 +1,8 @@
 (ns ads-board.views
 	(:use hiccup.page
 		  hiccup.element
-     :require [ads-board.layout :as layout]))
+     :require [ads-board.layout :as layout]
+     [ring.util.response :as response]))
 
 (defn index-page [] 
 	(layout/render
@@ -13,9 +14,12 @@
 	(layout/render
 		"users/all_users.html" {:users users :deleted deleted :added added :param param}))
 
-(defn add-user-page []
-	(layout/render
-		"users/add_user.html"))
+(defn add-user-page 
+  ([] (layout/render "users/add_user.html"))
+  ([result u-params]
+     (if result 
+  		(layout/render "users/add_user.html" (merge {:error-message result :user u-params}))
+  	 	(response/redirect "/users"))))
 
 (defn user-page [user updated]
 	(layout/render

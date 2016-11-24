@@ -60,7 +60,7 @@
 				:phone (:phone newItem)}))
 
 	(update-item [this updatedItem] 
-		(jdbc/update! db-spec :Users{
+		(jdbc/update! db-spec :users{
 				:login (:login updatedItem) 
 				:password (:password updatedItem) 
 				:name (:name updatedItem)
