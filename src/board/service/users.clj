@@ -1,8 +1,7 @@
 (ns board.service.users
   (:require [postal.core :refer [send-message]]
             [noir.util.crypt :as crypt] 
-            [board.dao.user :as user]
-            [board.utils.counter :as counter]))
+            [board.dao.user :as user]))
 
 (def userdao (user/->user-rep))
 
@@ -39,17 +38,12 @@
   (let [{id :id stored-pass :password userrole :role} (.read userdao username)]
     (if (and stored-pass (crypt/compare password stored-pass))
       (do
-        (counter/login id)
-        (println (str " *** Number: " (counter/get-number)))
-
         (if (= userrole "admin")
           (-> (success) (assoc :session (assoc session :user_id id :admin true :username username)))
           (-> (success) (assoc :session (assoc session :user_id id :username username)))))
       (error))))
 
 (defn logout [{session :session} success]
-  (counter/logout (get session :user_id))
-  (println (str " *** Number: " (counter/get-number)))
   (->(success) (assoc :session (assoc session :admin nil :user_id nil :username nil))))
 
 

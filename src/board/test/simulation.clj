@@ -25,16 +25,6 @@
 (def ping
   (partial http-get "/"))
 
-(def counter
-  (doseq [i (range 10)] 
-    (http/post "http://localhost:3000/login" 
-      {:timeout 2000 :form-params (sorted-map :username (str "test" i) :password "test")})))
-
-(def counter-simulation
-  {:name "counter simulation"
-   :scenarios [{:name "counter scenario"
-                :steps [{:name "counter Endpoint" :request counter}]}]})
-
 (def ping-simulation
   {:name "Ping simulation"
    :scenarios [{:name "Ping scenario"
@@ -47,5 +37,4 @@
 
 (def simulations
   {:ping ping-simulation
-   :counter counter-simulation
    :signup signup-simulation})

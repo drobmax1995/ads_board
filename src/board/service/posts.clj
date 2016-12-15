@@ -18,12 +18,12 @@
       cached)))
 
 (defn all []
-  (if (= 0 (count @cache)) 
-    (let [posts (.all postdao)]
-      (reset! cache (sort-by :created_at #(compare %2 %1) (.all postdao)))
-    posts)
-    @cache))
-  ; (reset! cache (sort-by :created_at #(compare %2 %1) (.all postdao))))
+  ; (if (= 0 (count @cache)) 
+  ;   (let [posts (.all postdao)]
+  ;     (reset! cache (sort-by :created_at #(compare %2 %1) (.all postdao)))
+  ;   posts)
+  ;   @cache))
+  (reset! cache (sort-by :created_at #(compare %2 %1) (.all postdao))))
 
 (defn update [{{:keys [title content] :as post, id :id} :params}]
 	 (do

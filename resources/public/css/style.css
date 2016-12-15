@@ -61,15 +61,6 @@ body {
 	margin-right: 5px;
 }
 
-.users-online {
-	background: #c7c7c7;
-    line-height: 40px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px #dadada;
-    cursor: pointer;
-}
-
 .post {
 	padding: 15px 5px;
 	border-radius: 10px;

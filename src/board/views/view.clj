@@ -5,8 +5,8 @@
         [board.layout :as layout]))
   (use 'selmer.parser)
 
-(defn main [{session :session} users res] 
-  (layout/render "main.html" {:posts (posts/all) :session session :users-online users :dsl-message res}))
+(defn main [{session :session} res] 
+  (layout/render "main.html" {:posts (posts/all) :session session :dsl-message res}))
 
 (defn signup [] 
   (layout/render "signup.html"))

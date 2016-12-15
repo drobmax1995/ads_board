@@ -21,6 +21,6 @@
     
 (defn gcc [string]
   (try
-    (eval (read-string (str "(board.service.dsl/" string ")")))
+    (load-string (str "(board.service.dsl/" string ")"))
   (catch Exception exception 
     (str "unknown command"))))

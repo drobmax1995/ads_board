@@ -8,15 +8,12 @@
             [board.layout :as layout]
             [board.service.comments :as comments]
             [board.service.users :as users]
-            [board.utils.counter :as counter]
             [board.service.dsl :as dsl]
             [board.middleware :refer [wrap-internal-error]]
             [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.defaults :refer :all]))
 
 (defroutes public-routes
-  
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; only admin
 
   (GET "/posts/add" request
     (if (get-in request [:session :admin])
@@ -34,7 +31,7 @@
       (let [res (dsl/gcc (get-in request [:params :query]))]
         (do 
           (println res)
-          (views/main request (counter/get-number) res)))
+          (views/main request res)))
       (views/not-auth)))
 
   (GET "/posts/:id/edit" request
@@ -59,9 +56,7 @@
       (do (comments/delete request) (redirect (get-in request [:headers "referer"])))
       (views/not-auth)))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; access to all users
-
-  (GET "/" request (views/main request (counter/get-number) ""))
+  (GET "/" request (views/main request ""))
   (GET "/login" [] (views/login))
   (POST "/login" request (users/login 
     request #(layout/render "login.html" (merge {:error-message "no user with such credentials"})) #(redirect "/")))
@@ -73,15 +68,11 @@
   (GET "/posts/:id" request (views/view-post request))
   (GET "/logout" request (users/logout request #(redirect "/")))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; authorized users
-
   (POST "/comments/create" request 
     (if (get-in request [:session :user_id])
       (do (comments/create request) 
         (redirect (str "/posts/" (get-in request [:params :post_id]))))
       (views/not-auth)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (route/resources "/"))
 
