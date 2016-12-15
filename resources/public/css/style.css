@@ -1,0 +1,83 @@
+html {
+	margin: 0;
+    padding: 0;
+}
+
+body {
+	background: #f1f1f1;
+}
+
+.header {
+	text-align: center;
+    padding: 15px 0;
+    background: #bfc1c3;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.admin-tab {
+    background: gainsboro;
+    padding: 10px;
+    text-align: center;
+}
+
+.logo {
+	text-decoration: none;
+    font-size: 25px;
+}
+
+.main {
+	width: 970px;
+}
+
+.greeting {
+	padding: 10px;
+    color: #a74242;
+    font-size: 15px;
+}
+
+.comments {
+	padding: 15px;
+    background: white;
+    border-radius: 15px;
+}
+
+.error-message {
+	padding: 10px;
+    color: #a91919;
+    font-size: 15px;
+}
+
+.date {
+	color: gray;
+    font-size: 10px;
+}
+
+.header h2 {
+	margin: 0;
+}
+
+.header a {
+	margin-right: 5px;
+}
+
+.users-online {
+	background: #c7c7c7;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px #dadada;
+    cursor: pointer;
+}
+
+.post {
+	padding: 15px 5px;
+	border-radius: 10px;
+	border: 1px solid rgba(255,255,255,0.4);
+	margin-bottom: 10px;
+}
+
+.manage-button {
+	display: block;
+    margin-bottom: 3px;
+}
