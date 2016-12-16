@@ -64,5 +64,7 @@ body {
 
 .manage-button {
 	display: block;
-    margin-bottom: 3px;
+    color: black;
+    background: gray;
+    margin-bottom: 10px;
 }

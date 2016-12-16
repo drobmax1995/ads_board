@@ -28,7 +28,7 @@
 
   (GET "/query" request
     (if (get-in request [:session :admin])
-      (let [res (dsl/gcc (get-in request [:params :query]))]
+      (let [res (dsl/run (str "(" (get-in request [:params :query]) ")"))]
         (do 
           (println res)
           (views/main request res)))

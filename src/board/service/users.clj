@@ -22,7 +22,7 @@
 (defn registration [{{:keys [username password email] :as user} :params} success error]
   (try 
     (if-not (.read userdao username)
-      (do 
+      (do
         (.create userdao (encrypt (merge user {:role "user"})))
           (let [myag (agent ())]
             (send-off myag (send-message conn {:from emailfrom
