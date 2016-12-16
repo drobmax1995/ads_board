@@ -4,19 +4,16 @@ html {
 }
 
 body {
-	background: #f1f1f1;
+
 }
 
 .header {
 	text-align: center;
     padding: 15px 0;
-    background: #eaafaf;
-    border-radius: 10px;
     margin: 10px 0;
 }
 
 .admin-tab {
-    background: #fbd9d9;
     padding: 10px;
     text-align: center;
 }
@@ -32,13 +29,11 @@ body {
 
 .greeting {
 	padding: 10px;
-    color: #a74242;
     font-size: 15px;
 }
 
 .comments {
 	padding: 15px;
-    background: #fbe0e0;
     border-radius: 15px;
 }
 
@@ -64,8 +59,6 @@ body {
 
 .post {
 	padding: 15px 5px;
-	border-radius: 10px;
-	border: 1px solid rgba(232,128,128,0.4);
 	margin-top: 10px;
 }
 

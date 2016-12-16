@@ -3,18 +3,25 @@
     <span class="error-message">{{not-auth}}</span>
     <div class="row">
         <div class="col-md-10">
-        {% if session.admin %}
+        {% if session.user_id %}   
             <div class="admin-tab">
                 <form class="form-inline" action="/query">
-                    <a href="/posts/add" style="margin-right: 150px;" class="btn btn-primary">add post</a>     
-                    <div class="form-group">
-                        <input class="form-control" style="width:300px;" type="text" name="query">
-                    </div>
-                    <button type="submit" class="btn btn-primary">execute</button>
+                     
+                        <a href="/posts/add" style="margin-right: 150px;" class="btn btn-primary">add post</a>
+                     
+
+                     {% if session.admin %}   
+                        <div class="form-group">
+                            <input class="form-control" style="width:300px;" type="text" name="query">
+                        </div>
+                        <button type="submit" class="btn btn-primary">execute</button>
+                    {% endif %}
                 </form>
-                <div class="users-messages">{{dsl-message}}</div>
+                     {% if session.admin %}   
+                        <div class="users-messages">{{dsl-message}}</div>
+                     {% endif %}
             </div>
-        {% endif %}
+            {% endif %}
         </div>
     </div>
     {% for item in posts %}

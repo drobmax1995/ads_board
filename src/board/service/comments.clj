@@ -15,7 +15,7 @@
   (.read commentdao id))
 
 (defn all [post_id]
-  (sort-by :created_at #(compare %2 %1) 
+  (sort-by :created_at #(compare %1 %2) 
     (.all commentdao post_id)))
 
 (defn delete [{{:keys [id] :as id} :params}]
