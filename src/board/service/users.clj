@@ -5,6 +5,8 @@
 
 (def userdao (user/->user-rep))
 
+(def mail-agent (agent ()))
+
 (def emailfrom "stavar094@gmail.com")
 (def pass "fpfpfp2016")
 
@@ -22,13 +24,12 @@
 (defn registration [{{:keys [username password email] :as user} :params} success error]
   (try 
     (if-not (.read userdao username)
-      (do
+      (do 
         (.create userdao (encrypt (merge user {:role "user"})))
-          (let [myag (agent ())]
-            (send-off myag (send-message conn {:from emailfrom
+            (send-off mail-agent (send-message conn {:from emailfrom
                     :to email
                     :subject "Welcome to our portal"
-                    :body (str "Hello," username)})))
+                    :body (str "Hello, " username)}))
             (success))
       (error))
   (catch Exception exception
