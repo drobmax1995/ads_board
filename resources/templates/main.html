@@ -20,9 +20,9 @@
     {% for item in posts %}
         <div class="post row">
             <div class="col-md-10">
-                <a href="/posts/{{item.id}}">{{item.title}}</a>
+                <h2><a href="/posts/{{item.id}}">{{item.title}}</a></h2>
                 <span class="date">({{item.created_at}})</span>
-                <p>{{item.content}}</p>
+                <h3>{{item.content}}</h3>
             </div>
             <div class="col-md-2">
                 {% if session.admin %}

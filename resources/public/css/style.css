@@ -10,13 +10,13 @@ body {
 .header {
 	text-align: center;
     padding: 15px 0;
-    background: #bfc1c3;
+    background: #eaafaf;
     border-radius: 10px;
     margin: 10px 0;
 }
 
 .admin-tab {
-    background: gainsboro;
+    background: #fbd9d9;
     padding: 10px;
     text-align: center;
 }
@@ -38,7 +38,7 @@ body {
 
 .comments {
 	padding: 15px;
-    background: white;
+    background: #fbe0e0;
     border-radius: 15px;
 }
 
@@ -51,6 +51,7 @@ body {
 .date {
 	color: gray;
     font-size: 10px;
+    text-align: right;
 }
 
 .header h2 {
@@ -64,8 +65,8 @@ body {
 .post {
 	padding: 15px 5px;
 	border-radius: 10px;
-	border: 1px solid rgba(255,255,255,0.4);
-	margin-bottom: 10px;
+	border: 1px solid rgba(232,128,128,0.4);
+	margin-top: 10px;
 }
 
 .manage-button {
